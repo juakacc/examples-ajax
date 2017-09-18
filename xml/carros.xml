@@ -1,6 +1,38 @@
-<carro>
-	<marca></marca>
-	<modelo></modelo>
-	<ano></ano>
-	<valor></valor>
-</carro>
+<CONCESSIONARIA>
+	<CARRO>
+		<MARCA>Volkswagen</MARCA>
+		<MODELO>Saveiro</MODELO>
+		<ANO>1995</ANO>
+		<VALOR>10000</VALOR>
+	</CARRO>
+	<CARRO>
+		<MARCA>Fiat</MARCA>
+		<MODELO>Uno</MODELO>
+		<ANO>2005</ANO>
+		<VALOR>20000</VALOR>
+	</CARRO>
+	<CARRO>
+		<MARCA>Hyund</MARCA>
+		<MODELO>Velost</MODELO>
+		<ANO>2016</ANO>
+		<VALOR>40000</VALOR>
+	</CARRO>
+	<CARRO>
+		<MARCA>Volkswagen</MARCA>
+		<MODELO>UP</MODELO>
+		<ANO>2017</ANO>
+		<VALOR>30000</VALOR>
+	</CARRO>
+	<CARRO>
+		<MARCA>Volkswagen</MARCA>
+		<MODELO>Voyage</MODELO>
+		<ANO>2017</ANO>
+		<VALOR>30000</VALOR>
+	</CARRO>
+	<CARRO>
+		<MARCA>Volkswagen</MARCA>
+		<MODELO>Gol</MODELO>
+		<ANO>2017</ANO>
+		<VALOR>39900</VALOR>
+	</CARRO>
+</CONCESSIONARIA>
