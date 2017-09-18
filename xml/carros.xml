@@ -1,0 +1,6 @@
+<carro>
+	<marca></marca>
+	<modelo></modelo>
+	<ano></ano>
+	<valor></valor>
+</carro>

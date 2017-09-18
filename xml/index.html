@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Requisição a arquivo XML</title>
+	<meta charset="UTF-8">
+
+	<script type="text/javascript">
+
+		function carregar() {
+			var httpRequest = new XMLHttpRequest();
+
+			httpRequest.onreadystatechange = function () {
+				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+					todos(this);
+				}
+			}
+			httpRequest.open("GET", "carros.xml", true);
+			httpRequest.send();
+		}
+
+		function todos(httpRequest) {
+			// Marca - modelo - ano
+			var table = "<tr><th>Marca</th><th>Modelo</th><th>Ano</th><th>Valor</th></tr>";
+
+			var resposta = httpRequest.ResponseXml;
+			var xml = resposta.getElementByTagName("carro");
+
+			for (i = 0; i < xml.lenght; i++) {
+				table += "<tr><td>" + 
+				xml[i].getElementByTagName("marca")[0].childNodes[0].nodeValue + 
+				"</td><td>" +
+				xml[i].getElementByTagName("modelo")[0].childNodes[0].nodeValue +
+				"</td><td>" +
+				xml[i].getElementByTagName("ano")[0].childNodes[0].nodeValue +
+				"</td><td>" +
+				xml[i].getElementByTagName("valor")[0].childNodes[0].nodeValue
+				"</td></tr>";
+			}
+			document.getElementById("carros").innerHTML = table;
+		}
+
+		function especifico(xml, i) {
+			if (i >= 0 && i < xml.lenght) {
+				um_a_um(xml, i);
+			} else {
+				// Fora dos indices
+			}
+		}
+
+		var atual = 0;
+
+		function next(xml) {
+			if (atual < xml.lenght) {
+				atual++;
+			}
+			um_a_um();
+		}
+
+		function previous() {
+			if (atual > 0) {
+				atual--;
+			}
+			um_a_um();
+		}
+
+		function um_a_um(xml, i) {
+			linha = "<tr><td>"+xml[i].getElementByTagName("marca")[0].childNodes[0].nodeValue + "</td>"
+					+ "<td>"+xml[i].getElementByTagName("modelo")[0].childNodes[0].nodeValue + "</td>" +
+					"<td>"+xml[i].getElementByTagName("ano")[0].childNodes[0].nodeValue + "</td>" + 
+					"<td>"+xml[i].getElementByTagName("valor")[0].childNodes[0].nodeValue + "</td>";
+
+			document.getElementById("carros").innerHTML = linha;
+		}
+
+	</script>
+</head>
+
+<body>
+
+	<label>
+		<input type="button" name="todos" value="todos" onclick="carregar()">	
+	</label>
+	
+	<label>
+		<input type="button" name="anterior" value="anterior">
+		<input type="button" name="proximo" value="próximo">
+	</label>
+
+	<label>
+		<input type="number" name="index" placeholder="Index">
+		<input type="button" name="especifico" value="específico">	
+	</label>
+	
+	<table id="carros">
+		
+	</table>
+</body>
+</html>

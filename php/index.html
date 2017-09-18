@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Requisição a arquivo PHP</title>
+	<meta charset="UTF-8" />
+
+	<script type="text/javascript">
+		
+		function carregarCidade() {
+			response = "<option>Olivedos</option>" + 
+				"<option>Soledade</option>";
+			document.getElementById("cidade").innerHTML = response;
+
+			var httpRequest = new XMLHttpRequest();
+
+			var estado = document.getElementById("estado");
+			
+			httpRequest.onreadystatechange = function() {
+				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+					var response = httpRequest.responseTxt;
+					// carregar no html
+					response = "<option>Olivedos</option>";
+					document.getElementById("cidade").innerHTML = response;
+				}
+			}
+			httpRequest.open("GET", "loadCidade.php?e=" + estado, true);
+			httpRequest.send();
+		}
+
+	</script>
+</head>
+<body>
+
+	<form>
+		<select name="estado" onchange="carregarCidade()">
+			<option value="pb">Paraíba</option>
+			<option value="pe">Pernambuco</option>
+		</select>
+
+		<select name="cidade" id="cidade">
+			
+		</select>
+	</form>
+
+</body>
+</html>
