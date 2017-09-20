@@ -7,10 +7,6 @@
 	<script type="text/javascript">
 		
 		function carregarCidade() {
-			response = "<option>Olivedos</option>" + 
-				"<option>Soledade</option>";
-			document.getElementById("cidade").innerHTML = response;
-
 			var httpRequest = new XMLHttpRequest();
 
 			var estado = document.getElementById("estado");
@@ -19,7 +15,7 @@
 				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
 					var response = httpRequest.responseTxt;
 					// carregar no html
-					response = "<option>Olivedos</option>";
+					//response = "<option>Olivedos</option>";
 					document.getElementById("cidade").innerHTML = response;
 				}
 			}
