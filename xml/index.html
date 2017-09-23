@@ -4,107 +4,39 @@
 	<title>Requisição a arquivo XML</title>
 	<meta charset="UTF-8">
 
-	<script type="text/javascript">
-
-		var atual = -1;
-		carregar(next);
-
-		function carregar(funcao) {
-			var httpRequest = new XMLHttpRequest();
-
-			httpRequest.onreadystatechange = function () {
-				if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-					funcao(this);
-				}
-			}
-			httpRequest.open("GET", "carros.xml", true);
-			httpRequest.send();
-		}
-
-		function todos(httpRequest) {
-			var table = "<tr><th>Marca</th><th>Modelo</th><th>Ano</th><th>Valor</th></tr>";
-
-			var resposta = httpRequest.responseXML;
-			var xml = resposta.getElementsByTagName("CARRO");
-
-			for (i = 0; i < xml.length; i++) {
-				table += "<tr><td>" + 
-				xml[i].getElementsByTagName("MARCA")[0].childNodes[0].nodeValue + 
-				"</td><td>" +
-				xml[i].getElementsByTagName("MODELO")[0].childNodes[0].nodeValue +
-				"</td><td>" +
-				xml[i].getElementsByTagName("ANO")[0].childNodes[0].nodeValue +
-				"</td><td>" +
-				xml[i].getElementsByTagName("VALOR")[0].childNodes[0].nodeValue
-				"</td></tr>";
-			}
-			document.getElementById("carros").innerHTML = table;
-		}
-
-		function especifico(request) {
-			
-			var i = document.getElementById("index").value;
-			
-			resposta = request.responseXML;
-			var xml = resposta.getElementsByTagName("CARRO");
-
-			if (i >= 0 && i < xml.length) {
-				um_a_um(xml, i);
-			} else {
-				alert("Fora do espectro");
-			}
-		}
-
-		function next(httpRequest) {
-			resposta = httpRequest.responseXML;
-			xml = resposta.getElementsByTagName("CARRO");
-
-			if (atual < xml.length) {
-				atual++;
-				um_a_um(xml, atual);
-			}
-		}
-
-		function previous(httpRequest) {
-			resposta = httpRequest.responseXML;
-			xml = resposta.getElementsByTagName("CARRO");
-
-			if (atual > 0) {
-				atual--;
-				um_a_um(xml, atual);
-			}
-		}
-
-		function um_a_um(xml, i) {
-			var table = "<tr><th>Marca</th><th>Modelo</th><th>Ano</th><th>Valor</th></tr>";
-			table += "<tr><td>"+xml[i].getElementsByTagName("MARCA")[0].childNodes[0].nodeValue + "</td>"
-					+ "<td>"+xml[i].getElementsByTagName("MODELO")[0].childNodes[0].nodeValue + "</td>" +
-					"<td>"+xml[i].getElementsByTagName("ANO")[0].childNodes[0].nodeValue + "</td>" + 
-					"<td>"+xml[i].getElementsByTagName("VALOR")[0].childNodes[0].nodeValue + "</td></tr>";
-
-			document.getElementById("carros").innerHTML = table;
-		}
-
-	</script>
+	<script type="text/javascript" src="script.xml.js"></script>
+	<link rel="stylesheet" type="text/css" href="../estilo.css">
 </head>
 
 <body>
-
-	<label>
-		<input type="button" name="todos" value="todos" onclick="carregar(todos)">	
-	</label>
-
-	<input type="button" name="anterior" value="anterior" onclick="carregar(previous)">
-
-	<input type="button" name="proximo" value="próximo" onclick="carregar(next)">
-
-	<label>
-		<input type="number" name="index" id="index" placeholder="Index">
-		<input type="button" name="especifico" value="específico" onclick="carregar(especifico)">	
-	</label>
+	<h1>Exemplo de requisição a arquivo XML, utilizando método GET</h1>	
 	
-	<table id="carros">
+	<table>
+		<tr>
+			<td><input type="button" name="todos" value="Todos" onclick="carregar(todos)"></td>
+		</tr>
+		<tr>
+			<td><input type="button" name="anterior" value="Anterior" onclick="carregar(previous)"></td>
+			<td><input type="button" name="proximo" value="Próximo" onclick="carregar(next)"></td>
+		</tr>
+		<tr>
+			<td><input type="button" name="especifico" value="Específico" onclick="carregar(especifico)">	</td>
+			<td><input type="number" name="index" id="index" placeholder="Index"></td>
+		</tr>
+	</table>
+	
+	<h3>Carros</h3>
+
+	<table id="carros" border="true">
 		
 	</table>
+
+	<a href="../">VOLTAR</a>
+
+	<div class="rodape">
+		<p><b>Disciplina:</b> Tecnologias de desenvolvimento de interface gráfica.</p>
+		<p><b>Professor:</b> Charles de Sá Evangelista</p>
+		<p><b>Alunos:</b> Diego, Joaquim e Patrick</p>
+	</div>
 </body>
 </html>

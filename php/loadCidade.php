@@ -1,22 +1,29 @@
 <?php
-if (isset($_GET['e']) and strlen($_GET['e']) > 1) {
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
+ini_set('error_log', dirname(__FILE__) . '/error_log.txt');
+error_reporting(E_ALL);
+
+//header('Content-Type: text/html; charset=UTF');
+
+if (isset($_POST['e']) and strlen($_POST['e']) > 1) {
 	// Abri conexão
-	$mysqli = new mysqli();
+	$mysqli = new mysqli('localhost', 'juakadb', 'juaka123', 'testeAjax');
 
-	$sql = "SELECT * FROM cidade WHERE estado = ?";
+	$sql = "SELECT cidade FROM cidade WHERE estado = ?";
 
-	if ($prepare = $mysqli.prepare($sql)) {
-		$prepare.bind_param("s", $_GET['e']);
+	if ($prepare = $mysqli->prepare($sql)) {
+		$prepare->bind_param("s", $_POST['e']);
 
-		$result = $prepare->execute();
-
+		$prepare->execute();
+		$prepare->bind_result($cidade);
 		$carregar = "";
 
-		while ($now = $result.array_fetch_assoc()) {
+		while ($prepare->fetch()) {
 			// Carregar
-			$carregar .= "<option value=". $now['cidade'] .">" . $now['cidade'] . "</option>";
+			$carregar .= "<option value=\" ".$cidade. "\">" . $cidade . "</option>";
 		}
-		echo $carregar;
+		echo utf8_encode($carregar);
 	}
 	$mysqli.close();
 }

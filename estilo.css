@@ -1,0 +1,8 @@
+.rodape {
+	position: absolute;
+	padding: 2px;
+	border-style: solid;
+	border-color: black;
+	bottom: 0;
+	right: 0;
+}
